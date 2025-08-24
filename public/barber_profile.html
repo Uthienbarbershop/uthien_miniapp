@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông tin thợ cắt tóc</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+    .avatar-list img { width: 80px; border-radius: 50%; margin: 5px; cursor: pointer; border: 2px solid transparent; }
+    .avatar-list img.selected { border-color: #007BFF; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; background: #007BFF; color: white; border: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+  <h2>🧑‍🎨 Hồ sơ Barber</h2>
+
+  <form id="barberForm">
+    <label for="full_name">Họ và tên</label>
+    <input type="text" id="full_name" name="full_name" required>
+
+    <label for="year_of_birth">Năm sinh</label>
+    <input type="number" id="year_of_birth" name="year_of_birth" required>
+
+    <label for="experience_years">Số năm kinh nghiệm</label>
+    <input type="number" id="experience_years" name="experience_years" required>
+
+    <label for="hometown">Quê quán</label>
+    <input type="text" id="hometown" name="hometown" required>
+
+    <label for="bio">Giới thiệu bản thân</label>
+    <textarea id="bio" name="bio" rows="4" placeholder="Tôi là một barber vui tính, chuyên fade, layer..."></textarea>
+
+    <label>Chọn ảnh đại diện</label>
+    <div class="avatar-list" id="avatarList">
+      <img src="images/avatar1.jpg" onclick="selectAvatar(this)" alt="avatar1">
+      <img src="images/avatar2.jpg" onclick="selectAvatar(this)" alt="avatar2">
+      <img src="images/avatar3.jpg" onclick="selectAvatar(this)" alt="avatar3">
+    </div>
+    <input type="hidden" id="avatar_url" name="avatar_url">
+
+    <button type="submit">Lưu thông tin</button>
+  </form>
+
+  <script>
+    function selectAvatar(img) {
+      document.querySelectorAll('.avatar-list img').forEach(i => i.classList.remove('selected'));
+      img.classList.add('selected');
+      document.getElementById('avatar_url').value = img.getAttribute('src');
+    }
+
+    document.getElementById('barberForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this));
+      console.log("Thông tin thợ:", data);
+      alert("✅ Đã lưu thông tin (demo)");
+      // Gửi về API thật ở đây nếu có
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+/* account.css */
+
+/* === Thiết lập chung === */
+body {
+  font-family: Arial, sans-serif; /* Đặt phông chữ cơ bản */
+  margin: 0; /* Loại bỏ lề mặc định của trình duyệt */
+  background-color: #f0f0f0; /* Màu nền xám nhạt cho toàn bộ trang */
+  display: flex; /* Sử dụng Flexbox để căn giữa vùng chứa chính */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: flex-start; /* Căn lề trên theo chiều dọc */
+  min-height: 100vh; /* Đảm bảo body chiếm ít nhất toàn bộ chiều cao màn hình */
+}
+
+.account-container {
+  width: 100%; /* Chiếm toàn bộ chiều rộng có sẵn */
+  max-width: 480px; /* Giới hạn chiều rộng tối đa, thân thiện với thiết bị di động */
+  background-color: #ffffff; /* Nền trắng cho vùng chứa chính */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ tạo hiệu ứng nổi */
+  min-height: 100vh; /* Đảm bảo vùng chứa này cũng chiếm ít nhất toàn bộ chiều cao màn hình */
+}
+
+---
+
+/* === Header (Tiêu đề trang) === */
+.header {
+  display: flex; /* Sử dụng Flexbox để sắp xếp các mục */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: space-between; /* Đẩy các mục ra hai phía */
+  padding: 12px 16px; /* Khoảng đệm bên trong tiêu đề */
+  background-color: #c62828; /* Màu nền đỏ nổi bật */
+  color: white; /* Màu chữ trắng */
+  position: relative; /* Quan trọng để căn giữa tiêu đề trang */
+}
+
+.back-button {
+  color: white; /* Màu mũi tên quay lại */
+  text-decoration: none; /* Xóa gạch chân */
+  font-size: 24px; /* Kích thước lớn hơn cho dễ nhìn */
+  z-index: 10; /* Đảm bảo nút nằm trên các phần tử khác nếu có giao nhau */
+}
+
+.page-title {
+  font-size: 18px; /* Kích thước chữ cho tiêu đề */
+  font-weight: bold; /* Chữ in đậm */
+  position: absolute; /* Đặt vị trí tuyệt đối để căn giữa */
+  left: 50%; /* Dịch sang giữa 50% */
+  transform: translateX(-50%); /* Dịch ngược lại 50% chiều rộng của chính nó để căn giữa hoàn hảo */
+  white-space: nowrap; /* Ngăn không cho tiêu đề xuống dòng */
+}
+
+.notification-icon {
+  font-size: 20px; /* Kích thước biểu tượng chuông */
+  position: relative; /* Để chứa huy hiệu thông báo */
+  z-index: 10; /* Đảm bảo biểu tượng nằm trên các phần tử khác */
+}
+
+.notification-badge {
+  background-color: yellow; /* Màu nền vàng cho huy hiệu */
+  color: black; /* Màu chữ đen */
+  font-size: 10px; /* Kích thước font nhỏ hơn */
+  border-radius: 50%; /* Biến thành hình tròn */
+  padding: 2px 5px; /* Khoảng đệm bên trong huy hiệu */
+  position: absolute; /* Đặt vị trí tuyệt đối */
+  top: -5px; /* Dịch lên trên một chút */
+  right: -5px; /* Dịch sang phải một chút */
+  line-height: 1; /* Căn giữa văn bản trong huy hiệu */
+  min-width: 10px; /* Đảm bảo huy hiệu có kích thước tối thiểu */
+  text-align: center; /* Căn giữa số bên trong */
+}
+
+---
+
+/* === Thẻ thông tin tài khoản (Account Balance Card) === */
+.account-balance-card {
+  padding: 20px; /* Khoảng đệm bên trong thẻ */
+  background: #fff; /* Nền trắng */
+  border-bottom: 1px solid #eee; /* Đường viền dưới nhẹ */
+}
+
+.user-info {
+  display: flex; /* Sử dụng Flexbox để sắp xếp avatar và thông tin người dùng */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  margin-bottom: 15px; /* Khoảng cách với phần số dư */
+}
+
+.avatar {
+  width: 55px; /* Chiều rộng avatar */
+  height: 55px; /* Chiều cao avatar */
+  border-radius: 50%; /* Biến thành hình tròn */
+  margin-right: 12px; /* Khoảng cách với văn bản */
+  object-fit: cover; /* Đảm bảo ảnh hiển thị đúng tỷ lệ */
+  border: 2px solid #c62828; /* Đường viền đỏ cho avatar */
+}
+
+.user-name {
+  font-weight: bold; /* Tên người dùng in đậm */
+  margin: 0; /* Loại bỏ lề mặc định */
+  color: #333; /* Màu chữ rõ ràng */
+}
+
+.member-status {
+  margin: 4px 0 0; /* Khoảng cách trên và dưới */
+  font-size: 14px; /* Kích thước chữ nhỏ hơn */
+  color: #666; /* Màu chữ nhẹ hơn */
+}
+
+.member-status a {
+  color: #c62828; /* Màu link nổi bật */
+  text-decoration: none; /* Bỏ gạch chân */
+  font-weight: bold; /* Chữ in đậm cho link */
+}
+
+.balance-info {
+  margin-top: 16px; /* Khoảng cách trên */
+  text-align: right; /* Căn phải thông tin số dư và nút */
+}
+
+.balance-label {
+  color: #666; /* Màu chữ nhẹ hơn */
+  font-size: 14px; /* Kích thước chữ */
+  margin-bottom: 5px; /* Khoảng cách dưới */
+}
+
+.balance-amount {
+  font-size: 28px; /* Kích thước chữ lớn cho số dư */
+  font-weight: bold; /* Số dư in đậm */
+  color: #c62828; /* Màu đỏ nổi bật cho số dư */
+  margin-bottom: 10px; /* Khoảng cách dưới */
+}
+
+.topup-button {
+  margin-top: 10px; /* Khoảng cách trên */
+  padding: 10px 20px; /* Khoảng đệm bên trong nút */
+  background: #c62828; /* Nền đỏ cho nút */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không có viền */
+  border-radius: 25px; /* Bo tròn nút */
+  cursor: pointer; /* Biến con trỏ thành bàn tay khi rê chuột */
+  font-size: 16px; /* Kích thước chữ */
+  font-weight: bold; /* Chữ in đậm */
+  transition: background 0.3s ease; /* Hiệu ứng chuyển động mượt mà khi hover */
+}
+
+.topup-button:hover {
+  background: #a52323; /* Đổi màu khi rê chuột qua */
+}
+
+---
+
+/* === Các tính năng (grid) === */
+.features-grid {
+  display: flex; /* Sử dụng Flexbox để tạo lưới */
+  flex-wrap: wrap; /* Cho phép các mục xuống dòng */
+  justify-content: space-around; /* Phân bổ đều khoảng trống giữa các mục */
+  padding: 20px 10px; /* Khoảng đệm bên trong lưới */
+  background: #fafafa; /* Nền xám nhạt */
+  border-bottom: 1px solid #eee; /* Đường viền dưới nhẹ */
+}
+
+.feature-item {
+  width: 30%; /* Mỗi mục chiếm khoảng 30% chiều rộng (tạo 3 cột) */
+  text-align: center; /* Căn giữa nội dung bên trong mỗi mục */
+  margin-bottom: 20px; /* Khoảng cách dưới giữa các hàng */
+  padding: 10px 0; /* Khoảng đệm trên dưới */
+  display: flex; /* Sử dụng Flexbox cho nội dung bên trong item */
+  flex-direction: column; /* Sắp xếp biểu tượng và văn bản theo chiều dọc */
+  align-items: center; /* Căn giữa các mục con */
+  color: #333; /* Màu chữ */
+  font-size: 14px; /* Kích thước chữ */
+}
+
+.feature-item > *:first-child { /* Áp dụng cho biểu tượng (phần tử đầu tiên) */
+  font-size: 30px; /* Kích thước biểu tượng lớn hơn */
+  margin-bottom: 8px; /* Khoảng cách với văn bản */
+  color: #c62828; /* Màu đỏ cho các biểu tượng */
+}
+
+.feature-item p {
+  margin: 0; /* Loại bỏ lề mặc định của thẻ p */
+  font-size: 14px; /* Kích thước chữ cho mô tả */
+}
+
+---
+
+/* === Thanh điều hướng dưới cùng (Bottom Navigation) === */
+.bottom-nav {
+  display: flex; /* Sử dụng Flexbox để sắp xếp các mục điều hướng */
+  justify-content: space-around; /* Phân bổ đều khoảng trống */
+  background: #fff; /* Nền trắng */
+  border-top: 1px solid #ddd; /* Đường viền trên nhẹ */
+  position: fixed; /* Cố định thanh điều hướng ở cuối màn hình */
+  bottom: 0; /* Đặt ở cuối */
+  left: 0; /* Kéo dài từ mép trái */
+  right: 0; /* Kéo dài đến mép phải */
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  max-width: 480px; /* Giới hạn chiều rộng theo vùng chứa chính */
+  margin: auto; /* Căn giữa nếu màn hình lớn hơn max-width */
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ phía trên */
+  z-index: 100; /* Đảm bảo thanh điều hướng nằm trên các nội dung khác */
+}
+
+.nav-item {
+  flex: 1; /* Mỗi mục chiếm một phần bằng nhau */
+  text-align: center; /* Căn giữa nội dung */
+  padding: 10px 5px; /* Khoảng đệm bên trong */
+  font-size: 12px; /* Kích thước chữ nhỏ */
+  color: #666; /* Màu chữ mặc định */
+  text-decoration: none; /* Bỏ gạch chân */
+  display: flex; /* Sử dụng Flexbox cho nội dung bên trong item */
+  flex-direction: column; /* Sắp xếp biểu tượng và văn bản theo chiều dọc */
+  align-items: center; /* Căn giữa các mục con */
+}
+
+.nav-item span {
+  margin-top: 5px; /* Khoảng cách giữa biểu tượng và văn bản */
+}
+
+.nav-item.active {
+  color: #c62828; /* Màu đỏ nổi bật cho mục đang hoạt động */
+  font-weight: bold; /* Chữ in đậm cho mục đang hoạt động */
+}
+
+.nav-item > *:first-child { /* Áp dụng cho biểu tượng trong thanh điều hướng */
+  font-size: 22px; /* Kích thước biểu tượng lớn hơn */
+}

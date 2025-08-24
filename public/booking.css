@@ -1,0 +1,38 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+.booking-container {
+  background: white;
+  max-width: 480px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+form label {
+  font-weight: bold;
+}
+form input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px;
+  box-sizing: border-box;
+}
+button {
+  background-color: #c62828;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 15px;
+  text-decoration: none;
+  color: #c62828;
+  font-weight: bold;
+}

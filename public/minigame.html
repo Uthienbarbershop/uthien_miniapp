@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minigame</title>
+  <link rel="stylesheet" href="minigame.css" />
+</head>
+<body>
+  <div class="minigame-container">
+    <h2>🎮 Minigame may mắn</h2>
+    <p>Chơi minigame mỗi ngày để nhận thưởng!</p>
+    <button onclick="quayThu()">Quay số</button>
+    <div id="ketQua" class="ket-qua"></div>
+  </div>
+
+  <script>
+    function quayThu() {
+      const phanThuong = ["10 điểm", "20 điểm", "Voucher 50k", "Chúc bạn may mắn lần sau"];
+      const ketQua = phanThuong[Math.floor(Math.random() * phanThuong.length)];
+      document.getElementById("ketQua").innerText = `🎁 Kết quả: ${ketQua}`;
+    }
+  </script>
+</body>
+</html>

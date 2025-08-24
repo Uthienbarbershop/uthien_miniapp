@@ -1,0 +1,22 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 20px;
+}
+.history-container {
+  background: white;
+  max-width: 480px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.history-list {
+  list-style: none;
+  padding-left: 0;
+}
+.history-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}

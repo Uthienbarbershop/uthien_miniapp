@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đánh giá thợ cắt tóc</title>
+  <link rel="stylesheet" href="barber.css" />
+  <style>
+    /* CSS để hiển thị placeholder sao và con trỏ */
+    .star-rating label {
+      cursor: pointer;
+      color: lightgray; /* Màu mặc định cho các sao chưa chọn */
+    }
+    .star-rating input:checked ~ label {
+      color: gold; /* Màu cho sao đã chọn và các sao phía trước */
+    }
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+      color: gold; /* Màu khi di chuột qua sao */
+    }
+
+    /* CSS mới cho phần tóm tắt đánh giá */
+    .review-summary {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    .summary-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .average-rating {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .total-reviews {
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .rating-breakdown .rating-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .rating-breakdown .star-number {
+      width: 20px; /* Chiều rộng cố định cho số sao */
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .rating-breakdown .progress-bar-container {
+      flex-grow: 1; /* Chiếm hết không gian còn lại */
+      background-color: #e0e0e0;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 0 10px;
+    }
+
+    .rating-breakdown .progress-bar {
+      height: 100%;
+      background-color: #28a745; /* Màu xanh lá cây */
+      width: 0%; /* Sẽ được cập nhật bằng JS */
+      border-radius: 5px;
+    }
+
+    .rating-breakdown .percentage {
+      width: 40px; /* Chiều rộng cố định cho phần trăm */
+      text-align: right;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="color: #28a745;">💬 Đánh giá sau khi trải nghiệm</h2>
+
+  <div class="review-summary">
+    <h3>Tóm tắt đánh giá</h3>
+    <div class="summary-header">
+      <div class="average-rating" id="averageRating">--</div>
+      <div>
+        <div class="stars-display" id="summaryStars"></div>
+        <div class="total-reviews" id="totalReviews">-- đánh giá</div>
+      </div>
+    </div>
+    <div class="rating-breakdown" id="ratingBreakdown">
+      </div>
+  </div>
+
+  <h3>Đánh giá thợ cắt tóc</h3>
+  <form id="reviewForm">
+    <div class="star-rating">
+      <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Tuyệt vời">★</label>
+      <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Rất tốt">★</label>
+      <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Tốt">★</label>
+      <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Trung bình">★</label>
+      <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Tệ">★</label>
+    </div>
+
+    <textarea id="comment" placeholder="Viết nhận xét của bạn..." rows="3" required></textarea><br>
+
+    <input type="hidden" id="customer_id" value="12345" />
+    <input type="hidden" id="barber_id" value="67890" />
+
+    <button type="submit" id="submitReview">Gửi đánh giá</button>
+    <div id="message" style="margin-top: 10px; color: red;"></div>
+  </form>
+
+  <h3>📋 Đánh giá của khách trước đó</h3>
+  <div id="reviewList">
+    <p>Đang tải đánh giá...</p>
+  </div>
+
+  <script>
+    // Hàm hiển thị thông báo
+    function showMessage(msg, type = 'error') {
+      const messageDiv = document.getElementById('message');
+      messageDiv.textContent = msg;
+      messageDiv.style.color = type === 'success' ? 'green' : 'red';
+      messageDiv.style.display = 'block';
+      setTimeout(() => {
+        messageDiv.style.display = 'none';
+      }, 3000);
+    }
+
+    document.getElementById("reviewForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const rating = document.querySelector("input[name='rating']:checked")?.value;
+      const comment = document.getElementById("comment").value.trim();
+
+      const customerId = document.getElementById("customer_id").value;
+      const barberId = document.getElementById("barber_id").value;
+
+      if (!rating) {
+        showMessage("Vui lòng chọn sao để đánh giá.", 'error');
+        return;
+      }
+      if (!comment) {
+        showMessage("Vui lòng nhập nhận xét của bạn.", 'error');
+        return;
+      }
+
+      const data = { customer_id: customerId, barber_id: barberId, rating, comment };
+
+      fetch("/api/review", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            return res.json().then(errorData => {
+              throw new Error(errorData.message || "Lỗi không xác định khi gửi đánh giá.");
+            });
+          }
+          return res.json();
+        })
+        .then((result) => {
+          showMessage(result.message || "Đánh giá đã được gửi thành công!", 'success');
+          document.getElementById("reviewForm").reset();
+          document.querySelectorAll('.star-rating label').forEach(label => label.style.color = 'lightgray');
+          loadReviews(); // Tải lại danh sách đánh giá sau khi gửi thành công và cập nhật tóm tắt
+        })
+        .catch((err) => {
+          showMessage(`Có lỗi khi gửi đánh giá: ${err.message}`, 'error');
+          console.error("Lỗi gửi đánh giá:", err);
+        });
+    });
+
+    function loadReviews() {
+      const barberId = document.getElementById("barber_id").value;
+      const reviewList = document.getElementById("reviewList");
+      reviewList.innerHTML = "<p>Đang tải đánh giá...</p>";
+
+      // Hiển thị trạng thái tải cho tóm tắt
+      document.getElementById("averageRating").textContent = "--";
+      document.getElementById("summaryStars").innerHTML = "";
+      document.getElementById("totalReviews").textContent = "-- đánh giá";
+      document.getElementById("ratingBreakdown").innerHTML = "";
+
+
+      fetch("/api/reviews/" + barberId)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`Lỗi HTTP: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          // Xóa thông báo tải
+          reviewList.innerHTML = "";
+
+          if (data.length === 0) {
+            reviewList.innerHTML = "<p>Chưa có đánh giá nào.</p>";
+            // Reset tóm tắt nếu không có đánh giá
+            document.getElementById("averageRating").textContent = "0.0";
+            document.getElementById("summaryStars").innerHTML = '☆'.repeat(5);
+            document.getElementById("totalReviews").textContent = "0 đánh giá";
+            document.getElementById("ratingBreakdown").innerHTML = "<p>Chưa có dữ liệu đánh giá sao.</p>";
+            return;
+          }
+
+          // Cập nhật tóm tắt đánh giá
+          updateReviewSummary(data);
+
+          // Sắp xếp đánh giá theo thời gian mới nhất lên đầu
+          data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+          data.forEach((review) => {
+            const item = document.createElement("div");
+            item.classList.add("review-item");
+            const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+            item.innerHTML =
+              `<p><strong>Đánh giá: ${stars}</strong></p>
+              <p>${review.comment}</p>
+              <p><em>Thời gian: ${new Date(review.created_at).toLocaleString('vi-VN')}</em></p>
+              <hr>`;
+            reviewList.appendChild(item);
+          });
+        })
+        .catch((err) => {
+          reviewList.innerHTML = "<p>Không thể tải đánh giá. Vui lòng thử lại sau.</p>";
+          console.error("Lỗi tải đánh giá:", err);
+          // Reset tóm tắt nếu có lỗi tải
+          document.getElementById("averageRating").textContent = "Lỗi";
+          document.getElementById("summaryStars").innerHTML = "";
+          document.getElementById("totalReviews").textContent = "Lỗi tải";
+          document.getElementById("ratingBreakdown").innerHTML = "<p>Không thể tải dữ liệu đánh giá sao.</p>";
+        });
+    }
+
+    // Hàm mới để cập nhật tóm tắt đánh giá
+    function updateReviewSummary(reviews) {
+      const totalReviewsCount = reviews.length;
+      let totalRatingSum = 0;
+      const ratingCounts = { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 };
+
+      reviews.forEach(review => {
+        totalRatingSum += parseInt(review.rating);
+        ratingCounts[review.rating]++;
+      });
+
+      const averageRating = totalReviewsCount > 0 ? (totalRatingSum / totalReviewsCount).toFixed(1) : 0;
+
+      // Cập nhật điểm trung bình và tổng số đánh giá
+      document.getElementById("averageRating").textContent = averageRating;
+      document.getElementById("totalReviews").textContent = `${totalReviewsCount} đánh giá`;
+
+      // Cập nhật sao trung bình (ví dụ: 4.8 sao sẽ là 4 sao đặc và 1 sao rỗng)
+      const fullStars = Math.floor(averageRating);
+      const halfStar = averageRating - fullStars >= 0.5 ? 1 : 0;
+      const emptyStars = 5 - fullStars - halfStar;
+      let summaryStarsHtml = '★'.repeat(fullStars);
+      if (halfStar) summaryStarsHtml += '½'; // Sử dụng ký tự sao rỗng nếu có
+      summaryStarsHtml += '☆'.repeat(emptyStars);
+      document.getElementById("summaryStars").innerHTML = summaryStarsHtml;
+
+
+      // Cập nhật biểu đồ phân tích đánh giá
+      const ratingBreakdownDiv = document.getElementById("ratingBreakdown");
+      ratingBreakdownDiv.innerHTML = ''; // Xóa nội dung cũ
+
+      for (let i = 5; i >= 1; i--) { // Duyệt từ 5 sao xuống 1 sao
+        const count = ratingCounts[i.toString()] || 0;
+        const percentage = totalReviewsCount > 0 ? ((count / totalReviewsCount) * 100).toFixed(0) : 0; // Làm tròn không có số thập phân
+
+        const row = document.createElement("div");
+        row.classList.add("rating-row");
+        row.innerHTML = `
+          <span class="star-number">${i}</span>
+          <div class="progress-bar-container">
+            <div class="progress-bar" style="width: ${percentage}%;"></div>
+          </div>
+          <span class="percentage">${percentage}%</span>
+        `;
+        ratingBreakdownDiv.appendChild(row);
+      }
+    }
+
+    // Tự động tải khi trang load
+    window.onload = loadReviews;
+  </script>
+</body>
+</html>

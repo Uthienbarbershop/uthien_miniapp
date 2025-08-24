@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thông báo</title>
+  <link rel="stylesheet" href="notifications.css">
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .notification { border-bottom: 1px solid #ddd; padding: 10px 0; }
+    .type { font-weight: bold; font-size: 14px; margin-bottom: 5px; }
+    .message { font-size: 16px; margin-bottom: 5px; }
+    .timestamp { font-size: 12px; color: gray; }
+    .filter-group { margin-bottom: 15px; }
+    button.filter { margin-right: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>🔔 Thông báo</h2>
+
+  <div class="filter-group">
+    <button class="filter" onclick="filter('all')">Tất cả</button>
+    <button class="filter" onclick="filter('system')">Hệ thống</button>
+    <button class="filter" onclick="filter('promotion')">Khuyến mãi</button>
+    <button class="filter" onclick="filter('booking')">Đặt lịch</button>
+  </div>
+
+  <div id="notificationList">Đang tải...</div>
+
+  <script>
+    let allNotifications = [];
+
+    function loadNotifications() {
+      fetch('/api/notifications')
+        .then(res => res.json())
+        .then(data => {
+          allNotifications = data;
+          renderNotifications(allNotifications);
+        });
+    }
+
+    function renderNotifications(notifications) {
+      const container = document.getElementById('notificationList');
+      container.innerHTML = '';
+      notifications.forEach(n => {
+        const div = document.createElement('div');
+        div.className = 'notification';
+        div.innerHTML = `
+          <div class="type">📢 ${n.type}</div>
+          <div class="message">${n.message}</div>
+          <div class="timestamp">${new Date(n.created_at).toLocaleString()}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function filter(type) {
+      if (type === 'all') return renderNotifications(allNotifications);
+      renderNotifications(allNotifications.filter(n => n.type === type));
+    }
+
+    loadNotifications();
+  </script>
+
+</body>
+</html>

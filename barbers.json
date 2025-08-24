@@ -1,0 +1,14 @@
+[
+    {
+      "name": "Thợ A",
+      "birthYear": 1995,
+      "hometown": "Đồng Nai",
+      "avatar": "images/thoa.jpg"
+    },
+    {
+      "name": "Thợ B",
+      "birthYear": 1992,
+      "hometown": "Cần Thơ",
+      "avatar": "images/thob.jpg"
+    }
+  ]

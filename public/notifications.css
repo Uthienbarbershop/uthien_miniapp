@@ -1,0 +1,33 @@
+body {
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+.notification {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.type {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.message {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: gray;
+}
+
+.filter-group {
+  margin-bottom: 15px;
+}
+
+button.filter {
+  margin-right: 10px;
+}

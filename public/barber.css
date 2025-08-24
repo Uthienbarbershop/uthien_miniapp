@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    padding: 20px;
+    color: #333;
+  }
+  
+  h1 {
+    color: #990000;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+  }
+  
+  input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #c62828;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #b71c1c;
+    #schedule button {
+      margin: 5px;
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f3f3f3;
+      cursor: pointer;
+    }
+    
+    #schedule button.extra {
+      background-color: #ffe0e0;
+      color: #d00;
+    }
+    
+    #schedule button.disabled {
+      background-color: #ddd;
+      color: #999;
+      cursor: not-allowed;
+    }

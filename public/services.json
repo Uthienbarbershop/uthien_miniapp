@@ -1,0 +1,48 @@
+{
+    "co_ban": [
+      { "name": "Thợ cắt", "price": "80K" },
+      { "name": "Boss cắt", "price": "100K" },
+      { "name": "Gội đầu thư giãn + massage mặt", "price": "100K" },
+      { "name": "Sấy tạo kiểu + vuốt wax", "price": "30K" },
+      { "name": "Cạo mặt", "price": "30K" },
+      { "name": "Ráy tai", "price": "60K" },
+      { "name": "Lột mụn", "price": "60K" },
+      { "name": "Hút mụn", "price": "50K" },
+      { "name": "Đánh mắt + se lỗ chân lông", "price": "50K" },
+      { "name": "Đắp mặt nạ dưỡng da", "price": "50K" },
+      { "name": "Cắt móng tay + chân", "price": "110K" },
+      { "name": "Nhổ tóc bạc 30 phút", "price": "70K" },
+      { "name": "Nhổ tóc bạc 60 phút", "price": "120K" },
+      { "name": "Nặn mụn 10 phút", "price": "50K" },
+      { "name": "Nặn mụn 5 phút", "price": "25K" }
+    ],
+    "hoa_chat": [
+      { "name": "Nhuộm đen", "price": "150K - 200K" },
+      { "name": "Nhuộm màu cơ bản", "price": "200K - 300K" },
+      { "name": "Nhuộm thời trang", "price": "500K - 600K" },
+      { "name": "Tẩy tóc", "price": "150K - 200K" },
+      { "name": "Ép tóc", "price": "100K - 200K" },
+      { "name": "Uốn tóc", "price": "250K - 300K" },
+      { "name": "Duỗi tóc", "price": "300K" },
+      { "name": "Uốn ruffled", "price": "450K - 500K" },
+      { "name": "Uốn con sâu", "price": "600K" },
+      { "name": "Uốn premlock", "price": "800K" },
+      { "name": "Dreadlock", "price": "3.000K - 4.000K" }
+    ],
+    "combo": [
+      { "name": "Combo 1", "description": "Cắt tóc + cạo mặt + lột mụn", "price": "150K" },
+      { "name": "Combo 2", "description": "Cắt tóc + cạo mặt + ráy tai", "price": "150K" },
+      { "name": "Combo 3", "description": "Cắt tóc + cạo mặt + ráy tai + đắp mặt nạ dưỡng da", "price": "200K" },
+      { "name": "Combo 4", "description": "Cắt tóc + cạo mặt + ráy tai + lột mụn", "price": "200K" },
+      { "name": "Combo 5", "description": "Cắt tóc + cạo mặt + gội đầu + massage mặt + sấy tạo kiểu", "price": "300K" },
+      { "name": "Combo 6", "description": "Cắt tóc + cạo mặt + lột mụn + gội đầu + massage mặt", "price": "240K" },
+      { "name": "Combo 6 bước", "description": "Xông mặt + hút mụn + tẩy tế bào chết + nặn mụn + massage mặt + đắp mặt nạ", "price": "170K" },
+      { "name": "Combo 7", "description": "Cắt tóc + cạo mặt + ráy tai + đắp mặt nạ + dưỡng da + lột mụn", "price": "240K" },
+      { "name": "Combo 8", "description": "Cắt tóc + cạo mặt + ráy tai + đắp mặt nạ + dưỡng da + lột mụn + gội đầu + massage mặt", "price": "340K" },
+      { "name": "Combo 9", "description": "Cắt tóc + uốn tóc Side Part", "price": "400K" },
+      { "name": "Combo 10", "description": "Cắt + nhuộm màu cơ bản", "price": "400K" },
+      { "name": "Combo 11", "description": "Cắt tóc + uốn ruffled", "price": "500K" },{ "name": "Combo 12", "description": "Cắt + uốn tóc + nhuộm tóc", "price": "600K" },
+      { "name": "Combo 13", "description": "Cắt tóc + nhuộm màu thời trang", "price": "600K" },
+      { "name": "Combo VIP 12 bước", "description": "Cắt tóc + cạo + ráy tai + lột mụn + tẩy tế bào chết + gội đầu + massage mặt + cổ vai gáy + xông mặt + hút mụn + đắp mặt nạ + cắt móng tay chân", "price": "500K" }
+    ]
+  }

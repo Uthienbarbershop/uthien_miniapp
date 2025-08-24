@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-image: url('images/background_trung_thu.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #333;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 50px;
+  color: #e64a19;
+  text-shadow: 1px 1px 2px #fff;
+}
+
+p {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.lantern {
+  position: fixed;
+  bottom: -100px;
+  width: 40px;
+  z-index: 10;
+  animation: floatUp 10s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}

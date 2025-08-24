@@ -1,0 +1,30 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 20px;
+}
+.shop-container {
+  background: white;
+  max-width: 480px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+.shop-list {
+  list-style: none;
+  padding: 0;
+}
+.shop-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 15px;
+  text-decoration: none;
+  color: #c62828;
+  font-weight: bold;
+}

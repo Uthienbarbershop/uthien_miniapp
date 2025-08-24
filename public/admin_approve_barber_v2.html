@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duyệt hồ sơ thợ - Admin</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    h1 { text-align: center; color: #333; }
+    .barber-card {
+      background: #fff; padding: 15px; border-radius: 10px; margin-bottom: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .barber-card img { width: 80px; border-radius: 50%; margin-right: 15px; }
+    .barber-info { display: flex; align-items: center; margin-bottom: 10px; }
+    .barber-details { flex-grow: 1; }
+    .admin-note, .cmnd-upload { margin-top: 10px; }
+    textarea { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc; }
+    .btns { margin-top: 10px; }
+    button {
+      padding: 8px 16px; margin-right: 10px;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+    .approve { background: #28a745; color: white; }
+    .reject { background: #dc3545; color: white; }
+    label.checkbox { display: block; margin-top: 8px; font-size: 14px; color: #555; }
+  </style>
+</head>
+<body>
+
+  <h1>✅ Duyệt hồ sơ thợ</h1>
+
+  <div class="barber-card">
+    <div class="barber-info">
+      <img src="images/avatar1.jpg" alt="Avatar">
+      <div class="barber-details">
+        <strong>Nguyễn Văn A</strong><br>
+        Năm sinh: 1998 | Kinh nghiệm: 3 năm<br>
+        Quê quán: Quảng Ngãi<br>
+        Bio: Tôi là một barber vui tính, chuyên fade & layer...
+      </div>
+    </div>
+
+    <div class="cmnd-upload">
+      <label><strong>Ảnh CMND/CCCD:</strong></label><br>
+      <img src="images/cmnd_demo.jpg" alt="CMND" style="max-width: 200px; border-radius: 8px; margin-top: 5px;">
+    </div>
+
+    <div class="admin-note">
+      <label for="admin_note"><strong>Lý do từ chối (hiển thị cho thợ):</strong></label>
+      <textarea id="admin_note" placeholder="Ví dụ: CMND bị mờ, thiếu ảnh..."></textarea>
+      <label class="checkbox">
+        <input type="checkbox" id="notify" checked> Gửi lý do này cho thợ biết
+      </label>
+    </div>
+
+    <div class="btns">
+      <button class="approve" onclick="approve()">✅ Duyệt</button>
+      <button class="reject" onclick="reject()">🛑 Từ chối</button>
+    </div>
+  </div>
+
+  <script>
+    function approve() {
+      const data = {
+        barber_id: "barber001",
+        is_verified: true,
+        admin_note: "",
+        notify_to_barber: false
+      };
+      console.log("✅ Đã duyệt:", data);
+      alert("Hồ sơ đã được duyệt!");
+    }
+
+    function reject() {
+      const note = document.getElementById("admin_note").value;
+      const notify = document.getElementById("notify").checked;
+
+      const data = {
+        barber_id: "barber001",
+        is_verified: false,
+        admin_note: note,
+        notify_to_barber: notify
+      };
+
+      console.log("🛑 Từ chối:", data);
+
+      if (notify) {
+        alert("🛑 Hồ sơ bị từ chối. Đã gửi lý do cho thợ: " + note);
+      } else {
+        alert("🛑 Hồ sơ bị từ chối. Không gửi lý do cho thợ.");
+      }
+    }
+  </script>
+
+</body>
+</html>

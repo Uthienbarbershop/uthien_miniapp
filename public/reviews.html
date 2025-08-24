@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đánh giá thợ - Út Hiền</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="reviews.css">
+</head>
+<body>
+  <div class="review-container">
+    <h1>Đánh giá về Barber</h1>
+    <div id="reviewSummary">
+      <p>⭐ Trung bình: <span id="avgRating">--</span> / 5</p>
+      <p>📋 Tổng lượt đánh giá: <span id="totalReviews">--</span></p>
+    </div>
+
+    <div id="reviewsList">
+      <!-- Review sẽ được load từ JS -->
+    </div>
+  </div>
+
+  <script>
+    const barberId = new URLSearchParams(window.location.search).get('barber_id');
+    fetch(`/api/getBarberReviews?barber_id=${barberId}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('avgRating').textContent = data.average_rating;
+        document.getElementById('totalReviews').textContent = data.total_reviews;
+
+        const reviewsList = document.getElementById('reviewsList');
+        data.reviews.forEach(r => {
+          const div = document.createElement('div');
+          div.className = 'review';
+          div.innerHTML = `<strong>⭐ ${r.rating}</strong> - ${r.comment} <br><small>${r.created_at}</small>`;
+          reviewsList.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
